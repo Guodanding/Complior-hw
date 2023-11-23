@@ -1,0 +1,235 @@
+/* High-level Definitions */
+/*整个程序的起始符号，表示一个完整的程序。*/
+Program : ExtDefList                            
+
+    ;
+/*外部定义的列表，用来表示程序中的一系列外部定义。*/
+ExtDefList : ExtDef ExtDefList                  
+
+    | /* empty */                               
+
+    ;
+/*外部定义，描述了变量声明、函数定义等。*/
+ExtDef : Specifier ExtDecList SEMI              
+
+    | Specifier SEMI                            
+
+    | Specifier FunDec CompSt                   
+
+    | Specifier error SEMI                      
+
+    | error SEMI                                
+
+    | Specifier error                           
+
+    | Specifier VarDec error SEMI               
+
+    ;
+/*示外部声明的列表。*/
+ExtDecList : VarDec                             
+
+    | VarDec COMMA ExtDecList                   
+
+    | VarDec error COMMA ExtDecList             
+
+    ;
+
+/* Specifiers */
+/*类型说明符，可以是基本类型（int, float等）或结构体类型。*/
+Specifier : TYPE                                
+
+    | StructSpecifier                           
+
+    ;
+/*结构体类型说明符，可以定义结构体或引用已有的结构体。*/
+StructSpecifier : STRUCT OptTag LC DefList RC   
+
+    | STRUCT Tag                                
+
+    | STRUCT error LC DefList RC                
+
+    | STRUCT OptTag LC error RC                 
+
+    | STRUCT OptTag LC error                    
+
+    | STRUCT error                              
+
+    ;
+/*结构体定义中的结构体标签，可以为空。*/
+OptTag : ID                                     
+
+    | /* empty */                               
+
+    ;
+/*结构体引用中的结构体标签。*/
+Tag : ID                                        
+
+    ;
+
+/* Declarators */
+/*变量声明，包括变量名、数组类型、维度等。*/
+VarDec : ID                                     
+
+    | VarDec LB INT RB                          
+
+    | VarDec LB error RB                        
+
+    | VarDec LB error                           
+
+    ;
+/*函数声明，包括函数名和参数列表。*/
+FunDec : ID LP VarList RP                       
+
+    | ID LP RP                                  
+
+    | ID LP error RP                            
+
+    | ID LP error                               
+
+    ;
+/*参数列表中的参数声明，可以有多个参数。*/
+VarList : ParamDec COMMA VarList                
+
+    | ParamDec                                  
+
+    ;
+/*参数声明，包括类型和变量名。*/
+ParamDec : Specifier VarDec                     
+
+    ;
+
+/* Statements */
+/*复合语句，表示一段复杂的语句块。*/
+CompSt : LC DefList StmtList RC                 
+
+    ;
+/*语句列表，用于表示多条语句的序列。*/
+StmtList : Stmt StmtList                        
+
+    | /* empty */                               
+
+    ;
+/*语句，可以是表达式语句、复合语句、return语句、if语句、while语句等。*/
+Stmt : Exp SEMI                                 
+
+    | CompSt                                    
+
+    | RETURN Exp SEMI                           
+
+    | IF LP Exp RP Stmt %prec LOWER_THAN_ELSE   
+
+    | IF LP Exp RP Stmt ELSE Stmt               
+
+    | WHILE LP Exp RP Stmt                      
+
+    | error SEMI                                
+
+    | IF LP error RP Stmt %prec LOWER_THAN_ELSE 
+
+    | IF LP Exp RP error ELSE Stmt              
+
+    | IF LP error RP ELSE Stmt                  
+
+    | error LP Exp RP Stmt                      
+
+    ;
+
+/* Local Definitions */
+/*局部定义列表，表示局部变量或常量的定义。*/
+DefList : Def DefList                           
+
+    | /* empty */                               
+
+    ;
+/*局部定义，包括类型说明符和变量定义。*/
+Def : Specifier DecList SEMI                    
+
+    ;
+/*变量定义列表，表示多个变量的定义。*/
+DecList : Dec                                   
+
+    | Dec COMMA DecList                         
+
+    | Dec error DecList                         
+
+    ;
+/*变量定义，可以包括初始化赋值。*/
+Dec : VarDec                                    
+
+    | VarDec ASSIGNOP Exp                       
+
+    | VarDec ASSIGNOP LEXWRONG                  
+
+    | VarDec RELOP Exp                          
+ 
+    | error ASSIGNOP Exp                        
+
+    | error Exp                                 
+
+    ;
+
+/* Expressions */
+/*表达式，可以是各种表达式，如赋值、逻辑、关系、算术等。*/
+Exp : Exp ASSIGNOP Exp                          
+
+    | Exp AND Exp                               
+
+    | Exp OR Exp                                
+
+    | Exp RELOP Exp                             
+
+    | Exp PLUS Exp                              
+
+    | Exp MINUS Exp                             
+
+    | Exp STAR Exp                              
+
+    | Exp DIV Exp                               
+
+    | LP Exp RP                                 
+
+    | MINUS Exp                                 
+
+    | NOT Exp                                   
+
+    | ID LP Args RP                             
+
+    | ID LP RP                                  
+
+    | Exp LB Exp RB                             
+
+    | Exp DOT ID                                
+
+    | ID                                        
+
+    | INT                                       
+
+    | FLOAT                                     
+
+    | Exp ASSIGNOP error                        
+
+    | Exp AND error                             
+
+    | Exp OR error                              
+
+    | Exp RELOP error                           
+
+    | Exp PLUS error                            
+
+    | Exp MINUS error                           
+
+    | Exp STAR error                            
+
+    | Exp DIV error                             
+
+    | ID LP error RP                            
+
+    | Exp LB error RB                           
+ 
+    ;
+/*函数调用的参数列表，可以包括多个参数。*/
+Args : Exp COMMA Args                           
+
+    | Exp                                       
+
+    ;

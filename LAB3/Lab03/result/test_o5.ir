@@ -471,10 +471,18 @@ DEC vid_Rvg 4
 DEC vid_AvbkFZGJU 32
 DEC vid_M2A9pi0x7W 32
 DEC vid_mNeWJ1saSK 4
+vid_ocwJ := #32985
+vid_UzS := #13447
+vid_xbmmZRiQTQ := #19049
+vid_nRlCJwkT := #6640
 t212 := &vid_Ah + #0
 *t212 := #37806
+vid_xBAQ := #25503
 t218 := &vid_Rvg + #0
 *t218 := #2624
+vid_irhj7pX := #20995
+vid_LARIMg := #15551
+vid_gqYTz4 := #1870
 t226 := &vid_AvbkFZGJU + #0
 *t226 := #11254
 t231 := &vid_AvbkFZGJU + #4
@@ -491,6 +499,19 @@ t256 := &vid_AvbkFZGJU + #24
 *t256 := #33172
 t261 := &vid_AvbkFZGJU + #28
 *t261 := #62750
+vid_lZ9XcWA := #15065
+vid_QeBV := #586
+vid_NRBuzZo8v := #11677
+vid_MFcV8JCZz := #23374
+vid_TjrH := #56643
+vid_FRMLzXh := #34290
+vid_wBA8NyriuU := #25683
+vid_oTSGHgVtpb := #14913
+vid_pjEzV := #11102
+vid_T_4to := #45768
+vid_e0RG := #3998
+vid_Hqhc6ZJB2 := #6833
+vid_Cg := #43728
 t279 := &vid_M2A9pi0x7W + #0
 *t279 := #36983
 t284 := &vid_M2A9pi0x7W + #4
@@ -507,8 +528,15 @@ t309 := &vid_M2A9pi0x7W + #24
 *t309 := #46247
 t314 := &vid_M2A9pi0x7W + #28
 *t314 := #13546
+vid_me3aVz := #38295
 t320 := &vid_mNeWJ1saSK + #0
 *t320 := #48117
+vid_w0pPo := #24801
+vid_Oxfos := #627
+vid_fC2WCOk := #57295
+vid_VWBg := #6796
+vid_Hzq6 := #8400
+vid_HU := #41655
 null := #0
 IF vid_zGB2nmVu != #0 GOTO label149
 GOTO label151
@@ -608,6 +636,8 @@ t333 := #1
 LABEL label154 :
 t397 := #0
 t401 := #0
+vid_ocwJ := #40242
+t405 := #40242
 ARG #1
 ARG #0
 t409 := CALL id_YGp4lO6
@@ -870,6 +900,8 @@ GOTO label237
 LABEL label236 :
 t549 := #1
 LABEL label237 :
+vid_gqYTz4 := #23783
+t559 := #23783
 t561 := #0
 t563 := #0
 IF vid_HU > #4519 GOTO label243
@@ -885,6 +917,8 @@ GOTO label241
 LABEL label240 :
 t561 := #1
 LABEL label241 :
+vid_UzS := vid_irhj7pX
+t569 := vid_irhj7pX
 ARG t569
 ARG t561
 ARG t559
@@ -955,6 +989,14 @@ t469 := CALL id_YGp4lO6
 GOTO label195
 LABEL label193 :
 LABEL label252 :
+t602 := #0
+IF #61940 != #0 GOTO label256
+GOTO label255
+LABEL label255 :
+t602 := #1
+LABEL label256 :
+vid_HbIB2lUmF9 := t602
+t601 := t602
 IF t601 != #0 GOTO label253
 GOTO label195
 LABEL label253 :
@@ -995,6 +1037,8 @@ GOTO label269
 LABEL label268 :
 t626 := #1
 LABEL label269 :
+vid_UzS := #51594
+t629 := #51594
 ARG vid_NRBuzZo8v
 ARG #10964
 t631 := CALL id_Sl3
@@ -1068,6 +1112,8 @@ GOTO label281
 LABEL label280 :
 t659 := #1
 LABEL label281 :
+vid_wBA8NyriuU := #38855
+t665 := #38855
 ARG #1
 ARG vid_HU
 t669 := CALL id_YGp4lO6
@@ -1170,6 +1216,11 @@ GOTO label252
 LABEL label195 :
 GOTO label170
 LABEL label168 :
+vid_my8 := #22020
+vid_PvEEMswdlh := #24262
+vid_N := #61443
+vid_cfbql := #107
+vid_SIIB := #16813
 t745 := #0
 t749 := #0
 t751 := #0 - vid_oXE8
@@ -1255,6 +1306,8 @@ IF t794 != #0 GOTO label308
 GOTO label310
 LABEL label310 :
 t808 := #0
+vid_fC2WCOk := vid_w0pPo
+t812 := vid_w0pPo
 t816 := #0
 ARG vid_me3aVz
 ARG #439
@@ -1355,6 +1408,8 @@ IF t808 != #0 GOTO label313
 GOTO label309
 LABEL label313 :
 t880 := #0
+vid_fC2WCOk := vid_w0pPo
+t884 := vid_w0pPo
 t888 := #0
 ARG vid_me3aVz
 ARG #439
@@ -1602,6 +1657,8 @@ t1117 := &vid_j + #0
 *t1117 := #34744
 t1122 := &vid_j + #4
 *t1122 := #4249
+vid_GU5yZ4P8m := #16334
+vid_uSG8nO := #15750
 t1130 := &vid_j + #0
 WRITE *t1130
 t1135 := &vid_j + #4
@@ -1746,6 +1803,8 @@ RETURN t1227
 FUNCTION id_tiv44_ :
 PARAM vid_V4sSbpxK7
 DEC vid_tpZqf7K9_ 20
+vid_jUnN := #3149
+vid_XSke := #48873
 t1251 := &vid_tpZqf7K9_ + #0
 *t1251 := #49781
 t1256 := &vid_tpZqf7K9_ + #4
@@ -1882,6 +1941,8 @@ t1370 := &vid_tpZqf7K9_ + #16
 WRITE *t1370
 RETURN vid_V4sSbpxK7
 FUNCTION id_E6tTOu5 :
+vid_g2s2L := #37979
+vid_Wq0kA2vGi := #13261
 t1375 := #0
 ARG #14977
 ARG vid_g2s2L

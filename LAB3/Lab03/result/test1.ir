@@ -1,4 +1,6 @@
 FUNCTION main :
+READ t1
+vn := t1
 IF vn > #0 GOTO label1
 IF vn < #0 GOTO label4
 WRITE #0

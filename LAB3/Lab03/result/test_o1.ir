@@ -9,5 +9,8 @@ t10 := &vop + #0
 *t10 := #1
 t13 := &vop + #4
 *t13 := #2
+ARG &vop
+t15 := CALL add
+vn := t15
 WRITE vn
 RETURN #0

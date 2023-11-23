@@ -10,8 +10,14 @@ LABEL label2 :
 t10 := vidx * #4
 t11 := va + t10
 IF *t11 > vm GOTO label4
-GOTO label1
+GOTO label5
 LABEL label4 :
+t15 := vidx * #4
+t16 := va + t15
+vm := *t16
+LABEL label5 :
+t17 := vidx + #1
+vidx := t17
 GOTO label1
 LABEL label3 :
 RETURN vm
@@ -35,6 +41,7 @@ LABEL label6 :
 IF vidx1 < varr_len GOTO label7
 GOTO label8
 LABEL label7 :
+vidx2 := #0
 LABEL label9 :
 IF vidx2 < varr_len GOTO label10
 GOTO label11
@@ -48,6 +55,8 @@ ARG varr_len
 ARG t47
 t46 := CALL func2
 *t45 := t46
+t51 := vidx2 + #1
+vidx2 := t51
 GOTO label9
 LABEL label11 :
 t56 := vidx1 * #4
@@ -57,6 +66,8 @@ t59 := &varr + t62
 ARG t59
 t58 := CALL func1
 *t57 := t58
+t63 := vidx1 + #1
+vidx1 := t63
 GOTO label6
 LABEL label8 :
 t67 := &varr + #0

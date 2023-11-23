@@ -34,7 +34,7 @@ LABEL label7 :
 t41 := #1
 LABEL label8 :
 IF t41 != #0 GOTO label6
-GOTO label1
+GOTO label5
 LABEL label6 :
 t45 := #0
 IF vp >= vi GOTO label9
@@ -43,9 +43,12 @@ LABEL label9 :
 t45 := #1
 LABEL label10 :
 IF t45 != #0 GOTO label4
-GOTO label1
+GOTO label5
 LABEL label4 :
 RETURN vidx
+LABEL label5 :
+t49 := vidx + #1
+vidx := t49
 GOTO label1
 LABEL label3 :
 RETURN #-1
@@ -68,6 +71,7 @@ LABEL label11 :
 IF vidx1 < #2 GOTO label12
 GOTO label13
 LABEL label12 :
+vidx2 := #0
 LABEL label14 :
 IF vidx2 < #2 GOTO label15
 GOTO label16
@@ -90,6 +94,8 @@ t93 := vidx1 * vidx1
 t91 := t93 * vidx2
 t90 := t91 + vidx2
 *t89 := t90
+t97 := vidx2 + #1
+vidx2 := t97
 GOTO label14
 LABEL label16 :
 t103 := vidx1 * #20
@@ -105,6 +111,8 @@ ARG t114
 ARG t107
 t105 := CALL func3
 *t100 := t105
+t122 := vidx1 + #1
+vidx1 := t122
 GOTO label11
 LABEL label13 :
 t128 := &varrS + #0

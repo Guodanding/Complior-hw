@@ -331,10 +331,16 @@ InterCode optimizePLUSIR(Operand dest, Operand src1, Operand src2) {
         operandCpy(dest, getValue(src1->value + src2->value));
         return getNullInterCode();
     }
-    // a = b + 0
+    // dest = src1 + 0
     else if (src2->kind == CONSTANT_OP && src2->value == 0 &&
              src1->kind != GET_ADDR_OP && src1->kind != GET_VAL_OP) {
         operandCpy(dest, src1);
+        return getNullInterCode();
+    }
+    // dest = 0 + src2
+    else if (src1->kind == CONSTANT_OP && src1->value == 0 &&
+             src2->kind != GET_ADDR_OP && src2->kind != GET_VAL_OP) {
+        operandCpy(dest, src2);
         return getNullInterCode();
     }
     else {
@@ -475,7 +481,6 @@ InterCode translateExp(Node* root, Operand place) {
         then assign the expression to the temporary variable, and finally assign the temporary variable.
         */
        // Exp -> ID ASSIGNOP Exp
-       // ???????????????????????????
 
         // printf("try to reasult = 1 in %d\n", root->lineno);
 
@@ -483,23 +488,22 @@ InterCode translateExp(Node* root, Operand place) {
             strcmp(root->children[0]->children[0]->name, "ID") == 0) {
             // todo
             Entry variable = findSymbolAll(root->children[0]->children[0]->strVal);
-            Operand right = newTemp();
-            InterCode code1 = translateExp(root->children[2], right);
-            Operand left = getVar(variable->name);
+            Operand t1 = newTemp();
+            InterCode code1 = translateExp(root->children[2], t1);
+            Operand t2 = getVar(variable->name);
             InterCode code2 = (InterCode)malloc(sizeof(InterCode_));
             code2->kind = ASSIGN_IR;
-            code2->ops[0] = left;
-            code2->ops[1] = right;
+            code2->ops[0] = t2;
+            code2->ops[1] = t1;
             InterCode code3 = (InterCode)malloc(sizeof(InterCode_));
             code3->kind = ASSIGN_IR;
             code3->ops[0] = place;
-            code3->ops[1] = right;
+            code3->ops[1] = t1;
             if (place != NULL) {
                 insertInterCode(code3, code2);
             }
             insertInterCode(code2, code1);
 
-            // 输出一条空指令来避免空指针错误
             return code1;
         }
 
@@ -998,7 +1002,7 @@ InterCode translateCond(Node* root, Operand labelTrue, Operand labelFalse) {
         insertInterCode(code3, code1);
         insertInterCode(code4, code1);
 
-        return code1; // ??????????????
+        return code1; 
     }
 	//NOT Exp
 	else if (root->childNum == 2 && strcmp(root->children[0]->name, "NOT") == 0) {
@@ -1008,7 +1012,7 @@ InterCode translateCond(Node* root, Operand labelTrue, Operand labelFalse) {
 	else if(root->childNum == 3 && strcmp(root->children[1]->name, "AND") == 0) {
 		Operand label1 = newLabel();
 		InterCode code1 = translateCond(root->children[0], label1, labelFalse);
-		InterCode code2 = translateCond(root->children[0], labelTrue, labelFalse);
+		InterCode code2 = translateCond(root->children[2], labelTrue, labelFalse);
 		InterCode code3 = (InterCode)malloc(sizeof(InterCode_));
         code3->kind = LABEL_IR;
 		code3->ops[0] = label1;
